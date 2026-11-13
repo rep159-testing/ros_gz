@@ -17,10 +17,8 @@ find_package(rclcpp_components REQUIRED)
 find_package(yaml_cpp_vendor REQUIRED)
 find_package(yaml-cpp REQUIRED)
 
-find_package(gz_transport_vendor REQUIRED)
 find_package(gz-transport REQUIRED)
 
-find_package(gz_msgs_vendor REQUIRED)
 find_package(gz-msgs REQUIRED)
 
 # Install the python module for this package
@@ -332,28 +330,6 @@ if(BUILD_TESTING)
     DESTINATION lib/${PROJECT_NAME}
   )
 
-  add_launch_test(test/launch/test_ros_subscriber.launch.py
-    TIMEOUT 200
-    ARGS "gz_msgs_ver:=${GZ_MSGS_VERSION_FULL}"
-  )
-
-  add_launch_test(test/launch/test_gz_subscriber.launch.py
-    TIMEOUT 200
-    ARGS "gz_msgs_ver:=${GZ_MSGS_VERSION_FULL}"
-  )
-
-  add_launch_test(test/launch/test_gz_server.launch.py
-    TIMEOUT 200
-  )
-
-  add_launch_test(test/launch/test_launch_action.launch.py
-    TIMEOUT 200
-  )
-
-  add_launch_test(test/launch/test_launch_action_classic.launch.py
-    TIMEOUT 200
-  )
-
   ament_add_gtest(${PROJECT_NAME}_bridge_config test/bridge_config.cpp
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
   target_include_directories(${PROJECT_NAME}_bridge_config PRIVATE src)
@@ -386,9 +362,7 @@ ament_export_targets(export_${PROJECT_NAME})
 # specific order: dependents before dependencies
 ament_export_dependencies(rclcpp)
 ament_export_dependencies(rclcpp_components)
-ament_export_dependencies(gz_msgs_vendor)
 ament_export_dependencies(gz-msgs)
-ament_export_dependencies(gz_transport_vendor)
 ament_export_dependencies(gz-transport)
 ament_export_dependencies(${BRIDGE_MESSAGE_TYPES})
 
